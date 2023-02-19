@@ -64,7 +64,6 @@ def get_api_answer(timestamp):
 
 def check_response(response):
     """Check response and get homeworks."""
-    print(f'-----response: {response}')
     if not isinstance(response, dict):
         message = f'check_response. Wrong answer: {response}'
         logger.error(message)
