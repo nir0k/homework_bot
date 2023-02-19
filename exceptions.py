@@ -1,10 +1,10 @@
 class APInotaswer(Exception):
-    """Test."""
+    """Exeption if API not answer."""
 
     pass
 
 
 class TokenNotExist(Exception):
-    """Test."""
+    """Extension if Token not exist."""
 
     pass
