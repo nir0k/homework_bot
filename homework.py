@@ -24,7 +24,6 @@ RETRY_PERIOD = 600
 ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
-
 HOMEWORK_VERDICTS = {
     'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
     'reviewing': 'Работа взята на проверку ревьюером.',
@@ -110,7 +109,7 @@ def main():
     check_tokens()
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     timestamp = int(time.time())
-    timestamp = timestamp - (300 * 24 * 60 * 60)
+    timestamp = timestamp - (RETRY_PERIOD)
     while True:
         try:
             answer = get_api_answer(timestamp)
