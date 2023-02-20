@@ -33,10 +33,12 @@ HOMEWORK_VERDICTS = {
 
 def check_tokens():
     """Check that tokens exists."""
-    if not (PRACTICUM_TOKEN or TELEGRAM_TOKEN or TELEGRAM_CHAT_ID):
+    if (PRACTICUM_TOKEN or TELEGRAM_TOKEN or TELEGRAM_CHAT_ID) is None:
         message = 'Check tokens. Except mantadory token'
         logger.critical(message)
         raise TokenNotExist(message)
+    else:
+        logger.debug('Check tokens. All required token exist')
 
 
 def send_message(bot, message):
@@ -64,7 +66,7 @@ def get_api_answer(timestamp):
 
 def check_response(response):
     """Check response and get homeworks."""
-    if not isinstance(response, dict):
+    if isinstance(response, dict) is not True:
         message = f'check_response. Wrong answer: {response}'
         logger.error(message)
         raise TypeError(message)
@@ -76,7 +78,7 @@ def check_response(response):
         message = "check_response. key current_date not exist"
         logger.error(message)
         raise TypeError(message)
-    if not isinstance(response['homeworks'], list):
+    if isinstance(response['homeworks'], list) is not True:
         message = ('check_response. Wrong type homeworks')
         logger.error(message)
         raise TypeError(message)
@@ -86,16 +88,16 @@ def check_response(response):
 
 def parse_status(homework):
     """Check status homework."""
-    if not homework.get('homework_name'):
+    if homework.get('homework_name') is None:
         message = "parse_status. homework_name not exist"
         logger.error(message)
         raise AssertionError(message)
     homework_name = homework.get('homework_name')
-    if not homework.get('status'):
+    if homework.get('status') is None:
         message = "parse_status. homework status not exist"
         logger.error(message)
         raise AssertionError(message)
-    if not HOMEWORK_VERDICTS.get(homework.get('status')):
+    if HOMEWORK_VERDICTS.get(homework.get('status')) is None:
         message = "parse_status. homework undefined status"
         logger.error(message)
         raise AssertionError(message)
